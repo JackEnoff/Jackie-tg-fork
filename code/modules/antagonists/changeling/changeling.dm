@@ -261,7 +261,6 @@
 /datum/antagonist/changeling/proc/on_life(datum/source, seconds_per_tick, times_fired)
 	SIGNAL_HANDLER
 
-
 	var/delta_time = DELTA_WORLD_TIME(SSmobs)
 
 	// If dead, we only regenerate up to half chem storage.
@@ -274,8 +273,8 @@
 		var/mob/living/living_owner = owner.current
 		if(living_owner.fire_stacks && living_owner.on_fire)
 			adjust_chemicals((chem_recharge_rate - 0.75) * delta_time)
-				else
-					adjust_chemicals((chem_recharge_rate - chem_recharge_slowdown) * delta_time)
+		else
+			adjust_chemicals((chem_recharge_rate - chem_recharge_slowdown) * delta_time)
 
 
 /**
