@@ -262,6 +262,7 @@
 	SIGNAL_HANDLER
 
 	var/delta_time = DELTA_WORLD_TIME(SSmobs)
+	var/mob/living/living_owner = owner.current
 
 	// If dead, we only regenerate up to half chem storage.
 	if(owner.current.stat == DEAD)
@@ -269,8 +270,6 @@
 
 	// If we're not dead and not on fire - we go up to the full chem cap at normal speed, otherwise its 1/4th of the chemical regen speed
 	else
-		if(isliving(owner.current))
-		var/mob/living/living_owner = owner.current
 		if(living_owner.fire_stacks && living_owner.on_fire)
 			adjust_chemicals((chem_recharge_rate - 0.75) * delta_time)
 		else
