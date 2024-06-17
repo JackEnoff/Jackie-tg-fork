@@ -268,16 +268,15 @@
 	if(owner.current.stat == DEAD)
 		adjust_chemicals((chem_recharge_rate - chem_recharge_slowdown) * delta_time, total_chem_storage * 0.5)
 
-	/// Reduced chemical regeneration while on fire
-	if(isliving(owner.current))
+	// If we're not dead and not on fire - we go up to the full chem cap at normal speed, otherwise its 1/4th of the chemical regen speed
+	else
+		if(isliving(owner.current))
 		var/mob/living/living_owner = owner.current
 		if(living_owner.fire_stacks && living_owner.on_fire)
 			adjust_chemicals((chem_recharge_rate - 0.75) * delta_time)
-			return
+				else
+					adjust_chemicals((chem_recharge_rate - chem_recharge_slowdown) * delta_time)
 
-	// If we're not dead and not on fire - we go up to the full chem cap at normal speed
-	else
-		adjust_chemicals((chem_recharge_rate - chem_recharge_slowdown) * delta_time)
 
 /**
  * Signal proc for [COMSIG_LIVING_POST_FULLY_HEAL]
